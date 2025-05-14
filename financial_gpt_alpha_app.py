@@ -7,11 +7,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-password = st.text_input("Enter access password", type="Chucky!>")
+password = st.text_input("Enter access password", type="password")
 
 if password != st.secrets.get("APP_PASSWORD"):
+    st.warning("Access denied. Incorrect password")
     st.stop()
 
+st.success("Access granted.")
 
 # Initialize ChatGPT (LangChain wrapper)
 llm = ChatOpenAI(temperature=0, model="gpt-3.5-turbo")
