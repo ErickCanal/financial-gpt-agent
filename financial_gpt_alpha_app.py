@@ -1,5 +1,6 @@
 import streamlit as st
 st.set_page_config(page_title="💼 Financial GPT Agent", layout="centered")
+st.title("📈 Financial Analyst with GPT")
 import pandas as pd
 import requests
 import os
@@ -61,9 +62,6 @@ def fetch_stock_data(symbol, alpha_key=None):
         return df, None
     except Exception as e:
         return None, {"error": str(e)}
-
-st.set_page_config(page_title="💼 Financial GPT Agent", layout="centered")
-st.title("📈 Financial Analyst with GPT-3.5")
 
 symbol = st.text_input("Enter stock symbol", value="AAPL")
 question = st.text_area("Ask a financial question", value="Should I consider investing now?")
