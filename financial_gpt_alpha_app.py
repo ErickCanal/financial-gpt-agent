@@ -16,7 +16,15 @@ if password != st.secrets.get("APP_PASSWORD"):
 st.success("Access granted.")
 
 # Initialize ChatGPT (LangChain wrapper)
-llm = ChatOpenAI(temperature=0, model="gpt-3.5-turbo")
+# llm = ChatOpenAI(temperature=0, model="gpt-3.5-turbo")
+from langchain.chat_models import ChatOpenAI
+import streamlit as st
+
+llm = ChatOpenAI(
+    temperature=0,
+    model="gpt-3.5-turbo",
+    openai_api_key=st.secrets["OPENAI_API_KEY"]
+)
 
 # Cache Alpha Vantage data
 @st.cache_data(ttl=3600)
