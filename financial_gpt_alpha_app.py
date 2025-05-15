@@ -1,4 +1,5 @@
 import streamlit as st
+st.set_page_config(page_title="💼 Financial GPT Agent", layout="centered")
 import pandas as pd
 import requests
 import os
