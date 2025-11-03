@@ -1,7 +1,8 @@
-langchain-community
 streamlit
 pandas
 requests
 python-dotenv
 openai
 langchain
+langchain-community
+langchain-openai
