@@ -19,12 +19,13 @@ st.success("Access granted.")
 
 # Initialize ChatGPT (LangChain wrapper)
 # llm = ChatOpenAI(temperature=0, model="gpt-3.5-turbo")
-from langchain.chat_models import ChatOpenAI
+from langchain_openai import ChatOpenAI
+
 import streamlit as st
 
 llm = ChatOpenAI(
     temperature=0,
-    model="gpt-3.5-turbo",
+    model="gpt-4",
     openai_api_key=st.secrets["OPENAI_API_KEY"]
 )
 
