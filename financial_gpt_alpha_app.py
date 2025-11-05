@@ -82,6 +82,6 @@ if st.button("Analyze"):
         sma50 = df["SMA50"].iloc[-1]
 
         prompt = f"{question}\n\nThe current price of {symbol} is {latest_price:.2f}.\nThe 20-day SMA is {sma20:.2f} and the 50-day SMA is {sma50:.2f}. Provide a brief analysis based on this data."
-        response = llm.predict(prompt)
+        response = llm.invoke(prompt)
         st.markdown("### 💬 GPT-3.5 Financial Insight")
         st.write(response)
