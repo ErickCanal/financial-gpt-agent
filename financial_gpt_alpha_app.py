@@ -1,6 +1,6 @@
 import streamlit as st
 st.set_page_config(page_title="💼 Financial GPT Agent", layout="centered")
-st.title("📈 Financial Analyst with GPT")
+st.title("Financial Analyst with GPT")
 import pandas as pd
 import requests
 import os
@@ -83,5 +83,5 @@ if st.button("Analyze"):
 
         prompt = f"{question}\n\nThe current price of {symbol} is {latest_price:.2f}.\nThe 20-day SMA is {sma20:.2f} and the 50-day SMA is {sma50:.2f}. Provide a brief analysis based on this data."
         response = llm.invoke(prompt)
-        st.markdown("### 💬 GPT-3.5 Financial Insight")
+        st.markdown("### GPT-3.5 Financial Insight")
         st.write(response)
