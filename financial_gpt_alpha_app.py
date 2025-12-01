@@ -46,7 +46,14 @@ def fetch_stock_data(symbol, alpha_key=None):
     response = requests.get(url, params=params)
     data = response.json()
 
+    # modified lines by adding if "error message" in data check
+    # --- CHANGE 1: Return a simple error message string instead of 'data' dictionary ---
     if "Time Series (Daily)" not in data:
+        if "Error Message" in data:
+            return None, f"API Error: {data['Error Message']}"
+        if "Note" in data:
+            return None, f"API Note: {data['Note']}"
+        # Fallback for unexpected formats
         return None, data
 
     try:
@@ -60,9 +67,10 @@ def fetch_stock_data(symbol, alpha_key=None):
             "4. close": "Close",
             "5. volume": "Volume"
         }, inplace=True)
-        return df, None
+        return df, None # Success case: return the DataFrame and None for error
     except Exception as e:
-        return None, {"error": str(e)}
+        # return None, {"error": str(e)}
+        return None, f"Error processing stock data: {str(e)}" # --- CHANGE 2: Return a simple error message string instead of an error dictionary ---
 
 symbol = st.text_input("Enter stock symbol", value="AAPL")
 question = st.text_area("Ask a financial question", value="Should I consider investing now?")
@@ -84,4 +92,6 @@ if st.button("Analyze"):
         prompt = f"{question}\n\nThe current price of {symbol} is {latest_price:.2f}.\nThe 20-day SMA is {sma20:.2f} and the 50-day SMA is {sma50:.2f}. Provide a brief analysis based on this data."
         response = llm.invoke(prompt)
         st.markdown("### GPT-3.5 Financial Insight")
-        st.write(response)
+        # Accessing only the clean text analysis using the .content attribute 
+        # to avoid displaying the extra JSON metadata from the LLM library response object.
+        st.markdown(response.content)
