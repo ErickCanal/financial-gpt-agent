@@ -1,3 +1,9 @@
+"""Data layer: fetches daily stock prices from Alpha Vantage and computes moving averages.
+
+This module owns all external market-data access. It returns a pandas DataFrame with the
+raw OHLCV columns plus computed SMA20/SMA50 columns, using a (df, error) tuple so callers
+can handle failures without exceptions crossing layer boundaries.
+"""
 import os
 import pandas as pd
 import requests

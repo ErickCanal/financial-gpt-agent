@@ -1,3 +1,9 @@
+"""Orchestration layer: composes the data, decision, and narrative layers.
+
+`AgentController.run()` runs the pipeline in order — fetch market data, evaluate the signal,
+then generate narrative — and short-circuits to an error result if the data fetch fails
+(so no LLM call is wasted on missing data). Returns a single dict the UI can render directly.
+"""
 from typing import Any
 from finance_tools import FinanceDataTool
 from evaluator import Evaluator

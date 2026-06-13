@@ -1,3 +1,10 @@
+"""Narrative layer: turns a pre-computed Signal into readable analyst context.
+
+Crucially, this layer does NOT make the trading decision — it receives a Signal that the
+Evaluator already produced and only explains it in prose. Supports four LLM providers
+(OpenAI, Claude, Deepseek, Mistral) tried in order as a fallback chain, so a quota error or
+outage on one provider transparently falls through to the next.
+"""
 import os
 from evaluator import Signal
 

@@ -1,3 +1,10 @@
+"""Decision layer: the deterministic core of the application.
+
+This is where the buy/sell/hold decision lives — extracted out of the LLM into pure,
+testable rules. Given a DataFrame with SMA20/SMA50 columns, `Evaluator.evaluate()` returns
+a `Signal` with an action, a confidence score, and human-readable reasons. No network calls,
+no LLM, no randomness: the same input always yields the same output.
+"""
 from dataclasses import dataclass, field
 import pandas as pd
 
