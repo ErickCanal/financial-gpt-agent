@@ -7,3 +7,4 @@ __pycache__/
 *.egg-info/
 .pytest_cache/
 .DS_Store
+financial_gpt_alpha_app.py

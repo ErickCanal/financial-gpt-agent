@@ -20,7 +20,13 @@ class Evaluator:
     """Deterministic technical-signal evaluator. No LLM involved."""
 
     def evaluate(self, df: pd.DataFrame) -> Signal:
-        latest = df.dropna(subset=["SMA20", "SMA50"]).iloc[-1]
+        valid = df.dropna(subset=["SMA20", "SMA50"])
+        if valid.empty:
+            raise ValueError(
+                "Not enough price history to compute signals "
+                "(need at least 50 trading days for SMA50)."
+            )
+        latest = valid.iloc[-1]
         price = latest["Close"]
         sma20 = latest["SMA20"]
         sma50 = latest["SMA50"]

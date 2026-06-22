@@ -9,7 +9,8 @@ load_dotenv()
 # --- Auth ---
 password = st.text_input("Enter access password", type="password")
 if password != st.secrets.get("APP_PASSWORD"):
-    st.warning("Access denied. Incorrect password.")
+    if password:  # only complain once the user has actually typed something
+        st.warning("Access denied. Incorrect password.")
     st.stop()
 
 st.success("Access granted.")

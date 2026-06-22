@@ -23,17 +23,30 @@ class AgentController:
         if df is None:
             return {"status": "error", "error": err}
 
-        signal = self.evaluator.evaluate(df)
+        try:
+            signal = self.evaluator.evaluate(df)
+        except ValueError as e:
+            return {"status": "error", "error": str(e)}
 
         latest = df.dropna(subset=["SMA20", "SMA50"]).iloc[-1]
-        narrative = self.llm_client.generate(
-            symbol=symbol,
-            question=question,
-            price=latest["Close"],
-            sma20=latest["SMA20"],
-            sma50=latest["SMA50"],
-            signal=signal,
-        )
+
+        # The narrative is optional context. If every LLM provider fails, we still
+        # return the deterministic signal — the decision never depended on the LLM.
+        try:
+            narrative = self.llm_client.generate(
+                symbol=symbol,
+                question=question,
+                price=latest["Close"],
+                sma20=latest["SMA20"],
+                sma50=latest["SMA50"],
+                signal=signal,
+            )
+        except Exception as e:
+            narrative = (
+                f"_Analyst narrative unavailable: {e}_\n\n"
+                "The signal above is computed from technical rules and does not depend "
+                "on the AI narrative."
+            )
 
         return {
             "status": "success",

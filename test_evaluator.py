@@ -56,6 +56,18 @@ def test_ignores_leading_nan_rows():
     assert Evaluator().evaluate(df).action == "BUY"
 
 
+def test_raises_when_no_valid_sma_rows():
+    import pytest
+    # All SMA50 NaN (e.g. a stock with < 50 days of history)
+    df = pd.DataFrame({
+        "Close": [100.0, 101.0],
+        "SMA20": [None, None],
+        "SMA50": [None, None],
+    })
+    with pytest.raises(ValueError, match="Not enough price history"):
+        Evaluator().evaluate(df)
+
+
 def test_returns_signal_dataclass():
     sig = Evaluator().evaluate(make_df(close=110, sma20=105, sma50=100))
     assert isinstance(sig, Signal)
