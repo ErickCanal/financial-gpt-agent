@@ -1,5 +1,7 @@
 # Financial GPT Agent
 
+> **Educational only, not financial advice.**
+
 A stock analysis tool that gives you a **deterministic** BUY / SELL / HOLD signal from
 technical indicators — and uses an LLM only to *explain* the signal, never to make the call.
 
