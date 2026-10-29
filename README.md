@@ -45,7 +45,6 @@ Every signal includes human-readable `reasons` explaining exactly why it fired.
 | `llm_client.py` | Narrative | Multi-provider LLM, generates context only |
 | `agent_controller.py` | Orchestration | Wires the pipeline together |
 | `main_app.py` | UI | Streamlit front end (the entry point) |
-| `financial_gpt_alpha_app.py` | — | Original monolith, kept for comparison |
 
 ## Setup
 
