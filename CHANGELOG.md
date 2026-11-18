@@ -33,6 +33,10 @@ Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 - Require `pillow>=13.0.0` to fix CVE-2026-128067 (high) and CVE-2026-128066 (medium).
   Pillow isn't imported by this project; it's a dependency of Streamlit, which allows
   versions below 14.
+- Require `h11>=0.16.0`. Earlier versions parse line endings in chunked request bodies
+  too leniently, which can allow HTTP request smuggling behind a buggy proxy. h11 isn't
+  imported by this project; it comes in through the LLM SDKs' HTTP client (httpx and
+  httpcore).
 - Dropped Python 3.10 support: Pillow 13 requires Python 3.11 or newer, so there's no
   patched Pillow for 3.10 (which reached end of life in October 2026). CI now tests
   3.11 and 3.12.
