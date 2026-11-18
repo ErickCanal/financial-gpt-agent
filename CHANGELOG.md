@@ -20,7 +20,7 @@ Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
   orchestration. All external calls are mocked; runs offline with no API keys.
   - Includes a regression guard asserting the LLM receives the pre-computed signal and
     never makes the decision itself.
-- **CI**: GitHub Actions workflow running pytest on push/PR across Python 3.10–3.12.
+- **CI**: GitHub Actions workflow running pytest on push/PR across Python 3.11–3.12.
 - `requirements.txt` / `requirements-dev.txt` dependency manifests.
 - `.gitignore` excluding secrets and Python caches.
 - `README.md` documenting architecture, setup, decision rules, and usage.
@@ -33,6 +33,9 @@ Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 - Require `pillow>=13.0.0` to fix CVE-2026-128067 (high) and CVE-2026-128066 (medium).
   Pillow isn't imported by this project; it's a dependency of Streamlit, which allows
   versions below 14.
+- Dropped Python 3.10 support: Pillow 13 requires Python 3.11 or newer, so there's no
+  patched Pillow for 3.10 (which reached end of life in October 2026). CI now tests
+  3.11 and 3.12.
 
 ### Notes
 - The original `financial_gpt_alpha_app.py` is retained unchanged for comparison.
