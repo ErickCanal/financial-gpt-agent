@@ -5,3 +5,6 @@ python-dotenv>=1.0
 langchain-openai>=0.1
 langchain-anthropic>=0.1
 langchain-mistralai>=0.1
+
+# Not imported directly; installed by streamlit. Minimum set for CVE-2026-128067 and CVE-2026-128066.
+pillow>=13.0.0

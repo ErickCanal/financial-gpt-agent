@@ -29,6 +29,11 @@ Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 - LLM role redefined: previously owned the buy/sell recommendation; now only explains a
   signal that deterministic rules have already produced.
 
+### Security
+- Require `pillow>=13.0.0` to fix CVE-2026-128067 (high) and CVE-2026-128066 (medium).
+  Pillow isn't imported by this project; it's a dependency of Streamlit, which allows
+  versions below 14.
+
 ### Notes
 - The original `financial_gpt_alpha_app.py` is retained unchanged for comparison.
 - Known issue: the OpenAI key on the maintainer's account has hit a quota limit
