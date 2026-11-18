@@ -50,6 +50,8 @@ Every signal includes human-readable `reasons` explaining exactly why it fired.
 
 ### 1. Install dependencies
 
+Requires Python 3.11 or newer.
+
 ```bash
 pip install -r requirements.txt
 ```
@@ -96,7 +98,7 @@ python -m pytest -v
 15 tests cover the decision logic, data-layer error handling, and orchestration. All external
 calls (HTTP, LLM) are mocked, so the suite runs offline in ~1 second and consumes no API quota.
 
-CI runs the same suite on every push/PR across Python 3.10–3.12 (see `.github/workflows/tests.yml`).
+CI runs the same suite on every push/PR across Python 3.11–3.12 (see `.github/workflows/tests.yml`).
 
 ## Multi-provider fallback
 
